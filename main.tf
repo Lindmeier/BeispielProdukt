@@ -45,7 +45,7 @@ module "LB_3e53191b-e96d-4e8b-ba66-89bdafbb9dee" {
   version = "1.0.0"
   # insert required variables here
   official_name = module.NAME_LB_3e53191b-e96d-4e8b-ba66-89bdafbb9dee.official_name
-  server = tolist([module.VM1_3e53191b-e96d-4e8b-ba66-89bdafbb9dee.vm_id, module.VM2_3e53191b-e96d-4e8b-ba66-89bdafbb9dee.vm_id ])
+  servers = tolist([module.VM1_3e53191b-e96d-4e8b-ba66-89bdafbb9dee.vm_id, module.VM2_3e53191b-e96d-4e8b-ba66-89bdafbb9dee.vm_id ])
 }
 # Output
 output "LB_ID" {
