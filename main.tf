@@ -30,7 +30,7 @@ module "VM1_3e53191b-e96d-4e8b-ba66-89bdafbb9dee" {
   version = "1.0.0"
   # insert required variables here
   official_name = module.NAME_VM1_3e53191b-e96d-4e8b-ba66-89bdafbb9dee.official_name
-  vm_type = "webserver"
+  vm_type = "Restservice"
 }
 
 module "VM2_3e53191b-e96d-4e8b-ba66-89bdafbb9dee" {
@@ -38,7 +38,7 @@ module "VM2_3e53191b-e96d-4e8b-ba66-89bdafbb9dee" {
   version = "1.0.0"
   # insert required variables here
   official_name = module.NAME_VM2_3e53191b-e96d-4e8b-ba66-89bdafbb9dee.official_name
-  vm_type = "webserver"
+  vm_type = "Restservice"
 }
 module "LB_3e53191b-e96d-4e8b-ba66-89bdafbb9dee" {
   source  = "app.terraform.io/team-automation/LB/fakewebservices"
