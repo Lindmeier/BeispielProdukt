@@ -41,10 +41,13 @@ contains:
     vars:
       vm_type: "webserver"
       servers: "{{tolist([module.VM1.vm_id, module.VM2.vm_id ])}}"
-  - inputs:
-    vm_type: String
-  - outputs:
-    lb_id: "{{LB.lb_id}}"
+inputs:
+  - type: "String"
+    name: "vm_type"
+outputs:
+  - type: "String"
+    name:  "lb_id"
+    value: "{{LB.lb_id}}"
 
 
 
