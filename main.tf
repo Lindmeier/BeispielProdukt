@@ -1,62 +1,62 @@
-module "NAME_VM1_685e9199-2ab2-49ee-a878-7b7005eb0f50" {
+module "NAME_VM1_28388383838" {
   source  = "app.terraform.io/team-automation/generator/random"
   version = "1.0.0"
   providers = {
-    random = "random_685e9199-2ab2-49ee-a878-7b7005eb0f50"
+    random = "random.random_28388383838"
   }
   type = "VM"
 }
 provider "random" {
-  alias = "random_685e9199-2ab2-49ee-a878-7b7005eb0f50"
+  alias = "random_28388383838"
 }
-module "NAME_VM2_685e9199-2ab2-49ee-a878-7b7005eb0f50" {
+module "NAME_VM2_28388383838" {
   source  = "app.terraform.io/team-automation/generator/random"
   version = "1.0.0"
   providers = {
-    random = "random_685e9199-2ab2-49ee-a878-7b7005eb0f50"
+    random = "random.random_28388383838"
   }
   type = "VM"
 }
-module "NAME_LB_685e9199-2ab2-49ee-a878-7b7005eb0f50" {
+module "NAME_LB_28388383838" {
   source  = "app.terraform.io/team-automation/generator/random"
   version = "1.0.0"
   providers = {
-    random = "random_685e9199-2ab2-49ee-a878-7b7005eb0f50"
+    random = "random.random_28388383838"
   }
   type = "LB"
 }
-module "VM1_685e9199-2ab2-49ee-a878-7b7005eb0f50" {
+module "VM1_28388383838" {
   source  = "app.terraform.io/team-automation/VM/fakewebservices"
   version = "1.0.0"
   providers = {
-    fakewebservices = "fakewebservices_685e9199-2ab2-49ee-a878-7b7005eb0f50"
+    fakewebservices = "fakewebservices.fakewebservices_28388383838"
   }
   vm_type       = "webserver"
-  official_name = module.NAME_VM1_685e9199-2ab2-49ee-a878-7b7005eb0f50.official_name
+  official_name = module.NAME_VM1_28388383838.official_name
 }
 provider "fakewebservices" {
-  alias = "fakewebservices_685e9199-2ab2-49ee-a878-7b7005eb0f50"
+  alias = "fakewebservices_28388383838"
   token = var.token
 }
-module "VM2_685e9199-2ab2-49ee-a878-7b7005eb0f50" {
+module "VM2_28388383838" {
   source  = "app.terraform.io/team-automation/VM/fakewebservices"
   version = "1.0.0"
   providers = {
-    fakewebservices = "fakewebservices_685e9199-2ab2-49ee-a878-7b7005eb0f50"
+    fakewebservices = "fakewebservices.fakewebservices_28388383838"
   }
   vm_type       = "webserver"
-  official_name = module.NAME_VM2_685e9199-2ab2-49ee-a878-7b7005eb0f50.official_name
+  official_name = module.NAME_VM2_28388383838.official_name
 }
-module "LB_685e9199-2ab2-49ee-a878-7b7005eb0f50" {
+module "LB_28388383838" {
   source  = "app.terraform.io/team-automation/LB/fakewebservices"
   version = "1.0.0"
   providers = {
-    fakewebservices = "fakewebservices_685e9199-2ab2-49ee-a878-7b7005eb0f50"
+    fakewebservices = "fakewebservices.fakewebservices_28388383838"
   }
-  official_name = module.NAME_LB_685e9199-2ab2-49ee-a878-7b7005eb0f50.official_name
-  servers       = tolist([module.VM1_685e9199-2ab2-49ee-a878-7b7005eb0f50.vm_id, module.VM2_685e9199-2ab2-49ee-a878-7b7005eb0f50.vm_id ])
+  official_name = module.NAME_LB_28388383838.official_name
+  servers       = tolist([module.VM1_28388383838.vm_id, module.VM2_28388383838.vm_id ])
 }
-output "lb_id_685e9199-2ab2-49ee-a878-7b7005eb0f50" {
+output "lb_id_28388383838" {
   description = "Loadbalancer ID"
-  value       = module.LB_685e9199-2ab2-49ee-a878-7b7005eb0f50.lb_id
+  value       = module.LB_28388383838.lb_id
 }
