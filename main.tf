@@ -38,6 +38,9 @@ provider "fakewebservices" {
   alias = "fakewebservices_28388383838"
   token = var.token
 }
+variable "token" {
+  type = string
+}
 module "VM2_28388383838" {
   source  = "app.terraform.io/team-automation/VM/fakewebservices"
   version = "1.0.0"
