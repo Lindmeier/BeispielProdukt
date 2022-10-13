@@ -1,53 +1,62 @@
-# Provider Configuration 
-variable "provider_token"{
-    type = string
+module "NAME_VM1_685e9199-2ab2-49ee-a878-7b7005eb0f50" {
+  source  = "app.terraform.io/team-automation/generator/random"
+  version = "1.0.0"
+  providers = {
+    random = "random_685e9199-2ab2-49ee-a878-7b7005eb0f50"
+  }
+  type = "VM"
+}
+provider "random" {
+  alias = "random_685e9199-2ab2-49ee-a878-7b7005eb0f50"
+}
+module "NAME_VM2_685e9199-2ab2-49ee-a878-7b7005eb0f50" {
+  source  = "app.terraform.io/team-automation/generator/random"
+  version = "1.0.0"
+  providers = {
+    random = "random_685e9199-2ab2-49ee-a878-7b7005eb0f50"
+  }
+  type = "VM"
+}
+module "NAME_LB_685e9199-2ab2-49ee-a878-7b7005eb0f50" {
+  source  = "app.terraform.io/team-automation/generator/random"
+  version = "1.0.0"
+  providers = {
+    random = "random_685e9199-2ab2-49ee-a878-7b7005eb0f50"
+  }
+  type = "LB"
+}
+module "VM1_685e9199-2ab2-49ee-a878-7b7005eb0f50" {
+  source  = "app.terraform.io/team-automation/VM/fakewebservices"
+  version = "1.0.0"
+  providers = {
+    fakewebservices = "fakewebservices_685e9199-2ab2-49ee-a878-7b7005eb0f50"
+  }
+  vm_type       = "webserver"
+  official_name = module.NAME_VM1_685e9199-2ab2-49ee-a878-7b7005eb0f50.official_name
 }
 provider "fakewebservices" {
-  token = var.provider_token
+  alias = "fakewebservices_685e9199-2ab2-49ee-a878-7b7005eb0f50"
+  token = var.token
 }
-
-# Module Calls (Instanziierung der Bausteine)
-module "NAME_VM1_3e53191b-e96d-4e8b-ba66-89bdafbb9dee" {
-  source  = "app.terraform.io/team-automation/generator/random"
-  version = "1.0.0"
-  type = "VM"
-}
-
-module "NAME_VM2_3e53191b-e96d-4e8b-ba66-89bdafbb9dee" {
-  source  = "app.terraform.io/team-automation/generator/random"
-  version = "1.0.0"
-  type = "VM"
-}
-
-module "NAME_LB_3e53191b-e96d-4e8b-ba66-89bdafbb9dee" {
-  source  = "app.terraform.io/team-automation/generator/random"
-  version = "1.0.0"
-  type = "VM"
-}
-
-module "VM1_3e53191b-e96d-4e8b-ba66-89bdafbb9dee" {
+module "VM2_685e9199-2ab2-49ee-a878-7b7005eb0f50" {
   source  = "app.terraform.io/team-automation/VM/fakewebservices"
   version = "1.0.0"
-  # insert required variables here
-  official_name = module.NAME_VM1_3e53191b-e96d-4e8b-ba66-89bdafbb9dee.official_name
-  vm_type = "db"
+  providers = {
+    fakewebservices = "fakewebservices_685e9199-2ab2-49ee-a878-7b7005eb0f50"
+  }
+  vm_type       = "webserver"
+  official_name = module.NAME_VM2_685e9199-2ab2-49ee-a878-7b7005eb0f50.official_name
 }
-
-module "VM2_3e53191b-e96d-4e8b-ba66-89bdafbb9dee" {
-  source  = "app.terraform.io/team-automation/VM/fakewebservices"
-  version = "1.0.0"
-  # insert required variables here
-  official_name = module.NAME_VM2_3e53191b-e96d-4e8b-ba66-89bdafbb9dee.official_name
-  vm_type = "db"
-}
-module "LB_3e53191b-e96d-4e8b-ba66-89bdafbb9dee" {
+module "LB_685e9199-2ab2-49ee-a878-7b7005eb0f50" {
   source  = "app.terraform.io/team-automation/LB/fakewebservices"
   version = "1.0.0"
-  # insert required variables here
-  official_name = module.NAME_LB_3e53191b-e96d-4e8b-ba66-89bdafbb9dee.official_name
-  servers = tolist([module.VM1_3e53191b-e96d-4e8b-ba66-89bdafbb9dee.vm_id, module.VM2_3e53191b-e96d-4e8b-ba66-89bdafbb9dee.vm_id ])
+  providers = {
+    fakewebservices = "fakewebservices_685e9199-2ab2-49ee-a878-7b7005eb0f50"
+  }
+  official_name = module.NAME_LB_685e9199-2ab2-49ee-a878-7b7005eb0f50.official_name
+  servers       = tolist([module.VM1_685e9199-2ab2-49ee-a878-7b7005eb0f50.vm_id, module.VM2_685e9199-2ab2-49ee-a878-7b7005eb0f50.vm_id ])
 }
-# Output
-output "LB_ID" {
-  value = module.LB_3e53191b-e96d-4e8b-ba66-89bdafbb9dee.lb_id
+output "lb_id_685e9199-2ab2-49ee-a878-7b7005eb0f50" {
+  description = "Loadbalancer ID"
+  value       = module.LB_685e9199-2ab2-49ee-a878-7b7005eb0f50.lb_id
 }
