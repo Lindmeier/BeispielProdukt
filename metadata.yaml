@@ -10,44 +10,52 @@ type: Terraform
 contains:
   - name: NAME_VM1
     vers: "1.0.0"
-    repo_url: "app.terraform.io/team-automation/generator/random"
+    repo_url: "terraform-etu.rz.bankenit.de/tfdp-automation/generator/random"
     vars:
-      type: "VM"
+      - name: "type"
+        value: "VM"
   - name: NAME_VM2
     vers: "1.0.0"
-    repo_url: "app.terraform.io/team-automation/generator/random"
+    repo_url: "terraform-etu.rz.bankenit.de/tfdp-automation/generator/random"
     vars:
-      type: "VM"
+      - name: "type"
+        value: "VM"
   - name: NAME_LB
     vers: "1.0.0"
-    repo_url: "app.terraform.io/team-automation/generator/random"
+    repo_url: "terraform-etu.rz.bankenit.de/tfdp-automation/generator/random"
     vars:
-      type: "LB"
+      - name: "type"
+        value: "LB"
   - name: VM1
     vers: "1.0.0"
-    repo_url: "app.terraform.io/team-automation/VM/fakewebservices"
+    repo_url: "terraform-etu.rz.bankenit.de/tfdp-automation/VM/fakewebservices"
     vars:
-      vm_type: "{{inputs.vm_type}}"
-      official_name: "{{NAME_VM1.official_name}}"
+      - name: "vm_type"
+        value: "{{inputs.vm_type}}"
+      - name: "official_name"
+        value: "{{NAME_VM1.official_name}}"
   - name: VM2
     vers: "1.0.0"
-    repo_url: "app.terraform.io/team-automation/VM/fakewebservices"
+    repo_url: "terraform-etu.rz.bankenit.de/tfdp-automation/VM/fakewebservices"
     vars:
-      vm_type: "webserver"
-      official_name: "{{NAME_VM2.official_name}}"
+      - name: "vm_type"
+        value: "{{inputs.vm_type}}"
+      - name: "official_name"
+        value: "{{NAME_VM2.official_name}}"
   - name: LB
     vers: "1.0.0"
-    repo_url: "app.terraform.io/team-automation/LB/fakewebservices"
+    repo_url: "terraform-etu.rz.bankenit.de/tfdp-automation/LB/fakewebservices"
     vars:
-      vm_type: "webserver"
-      servers: "{{tolist([module.VM1.vm_id, module.VM2.vm_id ])}}"
+      - name: "official_name"
+        value: "{{NAME_LB.official_name}}"
+      - name: "servers"
+        value: "{{tolist([VM1.vm_id, VM2.vm_id ])}}"
 inputs:
   - type: "String"
     name: "vm_type"
+    description: "VM Type"
 outputs:
   - type: "String"
     name:  "lb_id"
     value: "{{LB.lb_id}}"
-
-
-
+    description: "Loadbalancer ID"
